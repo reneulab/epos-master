@@ -10,8 +10,9 @@
 
 
 int main(void) {
-
-	motor_init();
+      int temp = 0xff;
+	temp = motor_init();
+        printf("Return: %d\n", temp); 
 	motor_enable();
 	sleep(1);
 
@@ -43,7 +44,6 @@ int main(void) {
 	pos_rotate_grad(180);
 	
 
-        printf("Shutting Down\n");
 	motor_disable();
 	motor_close();
 	return 0;

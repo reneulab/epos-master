@@ -14,13 +14,13 @@ void _pos_goto(int32_t pos_l, int32_t pos_r) {
 		{2, Switch_On_And_Enable_Operation}
 	};
 	
-	/*Socketcan_t target_right[2] = {
+	Socketcan_t target_right[2] = {
 		{4, pos_r*MOTOR_STEP_PER_MM},
 		{2, Switch_On_And_Enable_Operation}
-	};*/
+	};
 
 	PDO_send(motor_pdo_fd, PDO_TX1_ID+MOTOR_EPOS_L_ID, 2, target_left);
-	//PDO_send(motor_pdo_fd, PDO_TX1_ID+MOTOR_EPOS_R_ID, 2, target_right);
+	PDO_send(motor_pdo_fd, PDO_TX1_ID+MOTOR_EPOS_R_ID, 2, target_right);
 }
 
 void pos_straight(int32_t length) {

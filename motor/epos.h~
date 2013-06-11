@@ -27,9 +27,9 @@ int epos_Transmit_PDO_n_Mapping(uint16_t node_id, uint8_t n, uint8_t num_objects
 enum Epos_misc_conf {
 	Disable_sensor_supervised_by_software = (1<<0),
 	Disable_sensor_supervised_by_hardware = (1<<1),
-	Measure_DC_motor_resistance_at_every_change_to_enable = (1<<2),
-	Measure_main_position_sensors_motor_speed_exacting_by_detecting_encoder_pulse_time = (1<<3),
-	Measure_auxiliary_position_sensors_motor_speed_exacting_by_detecting_encoder_pulse_time = (1<<4),
+	Meassure_DC_motor_resistance_at_every_change_to_enable = (1<<2),
+	Meassure_main_position_sensors_motor_speed_exacting_by_detecting_encoder_pulse_time = (1<<3),
+	Meassure_auxiliary_position_sensors_motor_speed_exacting_by_detecting_encoder_pulse_time = (1<<4),
 	Polarity_bit = (1<<8)
 };
 
@@ -70,7 +70,6 @@ enum Epos_mode {
 
 int epos_Modes_of_Operation(uint16_t node_id, enum Epos_mode mode);
 
-int epos_Modes_of_Operation_Display(uint16_t node_id, enum Epos_mode mode); 
 /** 2^32 - 1 = off */
 int epos_Position_Window(uint16_t node_id, uint32_t enc);
 

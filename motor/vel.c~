@@ -33,9 +33,9 @@ int vel_set_speed_right(int32_t vel) {
 int vel_set_speed(int32_t movement, int32_t rotation) {
 	int err = 0;
 	double w = rotation/1000.0; // Remove milli
-	//int32_t v_r = movement + w*MOTOR_WHEELBASE_RADIUS;
+	int32_t v_r = movement + w*MOTOR_WHEELBASE_RADIUS;
 	int32_t v_l = movement + w*MOTOR_WHEELBASE_RADIUS;
-	//err |= vel_set_speed_right(v_r);
+	err |= vel_set_speed_right(v_r);
 	err |= vel_set_speed_left(v_l);
 	return err;
 }

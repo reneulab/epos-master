@@ -1,6 +1,6 @@
 #include "motor.h"
 #include "epos.h"
-#include "socketcan/printd.h"
+
 #include "canopen/canopen.h"
 
 /*
@@ -160,52 +160,7 @@ int epos_Modes_of_Operation(uint16_t node_id, enum Epos_mode mode) {
 	return SDO_write(motor_cfg_fd, &d);
 }
 
-int epos_Modes_of_Operation_Display(uint16_t node_id, enum Epos_mode mode) {
-        int result;
-        SDO_data d;
-        d.nodeid = node_id;
-        d.index = 0x6061;
-        d.subindex = 0x00;
-        d.data.size = 1; 
-        d.data.data = mode;
-        result = SDO_write(motor_cfg_fd, &d);
-        switch (d.data.data) {
-           case 7:
-              printd(LOG_ERROR, "Interpolated_Position_Mode\n");
-              break; 
-           case 6:
-              printd(LOG_ERROR, "Homing_Mode\n");
-              break;
-           case 3:
-              printd(LOG_ERROR, "Profile_Velocity_Mode\n");
-              break;   
-           case 1:
- 	      printd(LOG_ERROR, "Profile_Position_Mode\n");
-              break;
- 	   case -1:
-              printd(LOG_ERROR, "Position_Mode\n");
-              break;
-	   case -2:
-              printd(LOG_ERROR, "Velocity_Mode\n");
-              break;
-	   case -3:
-              printd(LOG_ERROR, "Current_Mode\n");
-              break;
-           case -4:
-              printd(LOG_ERROR, "Diagnostic_Mode\n");
-              break;
-           case -5:
-              printd(LOG_ERROR, "Master_Encoder_Mode\n");
-              break;
-           case -6:
-              printd(LOG_ERROR, "Step_Direction_Mode\n");
-              break;
-           default:
-              printd(LOG_ERROR, "Unknown Mode\n");
-              return 1;
-       }
-       return 0;
-}
+
 int epos_Position_Window(uint16_t node_id, uint32_t enc) {
 	SDO_data d;
 	d.nodeid = node_id;

@@ -29,10 +29,8 @@ static int motor_config_node(uint16_t node) {
 		printd(LOG_FATAL, "Motor: error configuring node %d, no power?\n", node);
 		return err;
 	}
-
-//	err |= epos_Maximal_Profile_Velocity(node, motor_mmsec_to_rpm(MOTOR_MAX_SPEED));
-
-        err |= epos_Quickstop_Deceleration(node, motor_mmsec_to_rpm(MOTOR_MAX_QUICK_ACC));
+	err |= epos_Maximal_Profile_Velocity(node, motor_mmsec_to_rpm(MOTOR_MAX_SPEED));
+	err |= epos_Quickstop_Deceleration(node, motor_mmsec_to_rpm(MOTOR_MAX_QUICK_ACC));
 	err |= epos_Profile_Acceleration(node, motor_mmsec_to_rpm(MOTOR_MAX_ACC));
 	err |= epos_Profile_Deceleration(node, motor_mmsec_to_rpm(MOTOR_MAX_ACC));
 	err |= epos_Motion_Profile_Type(node, trapezodial_profile);
@@ -145,12 +143,11 @@ int motor_init(void) {
 	}  */
 
 	// Set the default mode
-//	motor_setmode(Motor_mode_Velocity);
-
-        motor_setmode(Profile_Velocity_Mode); 
+	motor_setmode(Motor_mode_Velocity);
 	if (err != 0) {
 		return 5;// MOTOR_ERROR;
 	}
+
 	return 0;
 }
 
@@ -206,7 +203,6 @@ int motor_setmode(enum Motor_mode mode) {
 	int err = 0;
 	err |= epos_Modes_of_Operation(MOTOR_EPOS_L_ID, mode);
 	//err |= epos_Modes_of_Operation(MOTOR_EPOS_R_ID, mode);
-        err |= epos_Modes_of_Operation_Display(MOTOR_EPOS_L_ID, mode); 
 	return err;
 }
 
